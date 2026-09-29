@@ -119,7 +119,7 @@ export function serial(ctx) {
       return {
         type: 'tally',
         rows: [
-          { label: '肿瘤细胞', en: 'TUMOUR CELLS', total: TP.length, n: alive, color: '#ff7fb6' },
+          { label: '肿瘤细胞', en: 'TUMOR CELLS', total: TP.length, n: alive, color: '#ff7fb6' },
           { label: 'CAR-T 细胞', en: 'CAR-T CELLS', total: 6, n: nCar, color: '#7fe6ff' },
         ],
         opacity: envelope(t, 0.6, 11.6, 0.6, 0.5),

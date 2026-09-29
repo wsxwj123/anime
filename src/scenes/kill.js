@@ -95,7 +95,7 @@ export function synapse(ctx) {
     transition: { type: 'cross', dur: 1.2 },
     bloom: { strength: 0.85, radius: 0.6, threshold: 0.72 },
     labels: [
-      { t0: 0.8, t1: 4.6, at: () => v3(0.08, 0.72, 0.35), zh: '免疫突触', en: 'IMMUNOLOGICAL SYNAPSE', dx: 120, dy: -110, hl: 250, color: '#ffe6a0' },
+      { t0: 0.8, t1: 4.6, at: () => v3(0.08, 0.72, 0.35), zh: '免疫突触', en: 'IMMUNE SYNAPSE', dx: 120, dy: -110, hl: 250, color: '#ffe6a0' },
       { t0: 4.8, t1: 8.8, at: () => granCenter.clone(), zh: '细胞毒性颗粒', en: 'CYTOTOXIC GRANULES', dx: -140, dy: -120, hl: 220, color: '#ff8a50' },
       { t0: 6.6, t1: 9.7, at: () => v3(-1.6, 1.25, 0.5), zh: '细胞因子', en: 'IFN-γ · TNF-α · IL-2', dx: -120, dy: -70, hl: 200, color: '#9fe8ff' },
     ],
@@ -225,7 +225,7 @@ export function perforin(ctx) {
     bloom: { strength: 0.85, radius: 0.6, threshold: 0.72 },
     labels: [
       { t0: 2.2, t1: 5.8, at: () => perf[3].m.position.clone().add(v3(0, 0.15, 0)), zh: '穿孔素', en: 'PERFORIN', dx: 140, dy: -80, hl: 150, color: '#fff0d0' },
-      { t0: 5.0, t1: 7.8, at: () => gz[1].m.position.clone(), zh: '颗粒酶', en: 'GRANZYME B', dx: -150, dy: -90, hl: 170, color: '#ffa040' },
+      { t0: 5.0, t1: 7.8, at: () => gz[1].m.position.clone(), zh: '颗粒酶', en: 'GRANZYMES', dx: -150, dy: -90, hl: 170, color: '#ffa040' },
     ],
     update(t) {
       cam(S.camera, t);

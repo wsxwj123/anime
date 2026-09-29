@@ -508,7 +508,7 @@ body {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  padding: 0 6% 7%;
+  padding: 0 6% max(7%, 96px);
   box-sizing: border-box;
   background: radial-gradient(ellipse at 70% 60%, rgba(0, 0, 0, 0) 40%, rgba(0, 2, 6, 0.35));
   cursor: pointer;

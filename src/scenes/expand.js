@@ -131,7 +131,7 @@ export function expand(ctx) {
     duration: 12,
     transition: { type: 'cross', dur: 1.2 },
     bloom: { strength: 0.85, radius: 0.6, threshold: 0.72 },
-    labels: [{ t0: 1.3, t1: 3.2, at: () => heroes[0].group.position.clone().add(v3(0.1, 1.05, 0.2)), zh: '细胞分裂', en: 'MITOSIS', dx: 110, dy: -80, hl: 140, color: '#7fe6ff' }],
+    labels: [{ t0: 1.3, t1: 3.2, at: () => heroes[0].group.position.clone().add(v3(0.1, 1.05, 0.2)), zh: '细胞分裂', en: 'CELL DIVISION', dx: 110, dy: -80, hl: 140, color: '#7fe6ff' }],
     hud(t) {
       let value;
       if (t < 6.9) value = String(visibleCount);

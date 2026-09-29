@@ -208,7 +208,7 @@ export function extravasate(ctx) {
     labels: [
       { t0: 0.9, t1: 4.0, at: v3(-2.3, WALL_Y + 0.1, 0.5), zh: '血管内皮', en: 'ENDOTHELIUM', dx: -80, dy: 110, hl: 150, color: '#ff9aa6' },
       { t0: 3.2, t1: 6.6, at: () => src.clone().lerp(dst, 0.45), zh: '趋化因子', en: 'CHEMOKINES', dx: 130, dy: 40, hl: 150, color: '#ff8ccc' },
-      { t0: 6.4, t1: 8.8, at: () => tumors[0].group.position.clone().add(v3(-0.4, 0.8, 0.6)), zh: '肿瘤组织', en: 'TUMOUR SITE', dx: 110, dy: -90, hl: 150, color: '#ff7fb6' },
+      { t0: 6.4, t1: 8.8, at: () => tumors[0].group.position.clone().add(v3(-0.4, 0.8, 0.6)), zh: '肿瘤组织', en: 'TUMOR SITE', dx: 110, dy: -90, hl: 150, color: '#ff7fb6' },
     ],
     update(t) {
       cam(S.camera, t);

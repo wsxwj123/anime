@@ -158,13 +158,13 @@ export function car(ctx) {
     transition: { type: 'cross', dur: 1.2 },
     bloom: { strength: 0.8, radius: 0.55, threshold: 0.75 },
     labels: [
-      { t0: 1.6, t1: 11.6, at: () => wp(carG, v3(0.35, 2.2, 0.1)), zh: '单链抗体片段 scFv', en: 'ANTIGEN BINDING', dx: 150, dy: 36, hl: 250, color: '#ffd27a' },
+      { t0: 1.6, t1: 11.6, at: () => wp(carG, v3(0.35, 2.2, 0.1)), zh: '单链抗体片段（scFv）', en: 'ANTIGEN BINDING', dx: 150, dy: 36, hl: 250, color: '#ffd27a' },
       { t0: 3.0, t1: 11.6, at: () => wp(carG, v3(0.08, 1.05, 0)), zh: '铰链区', en: 'HINGE', dx: 190, dy: 10, hl: 150, color: '#e8d8b0' },
       { t0: 4.4, t1: 11.6, at: () => wp(carG, v3(-0.08, 0.0, 0)), zh: '跨膜区', en: 'TRANSMEMBRANE', dx: -200, dy: -30, hl: 170, color: '#ffc890' },
       { t0: 5.8, t1: 11.6, at: () => wp(carG, v3(0.32, -0.92, 0)), zh: '共刺激域 4-1BB / CD28', en: 'CO-STIMULATION', dx: 160, dy: 20, hl: 290, color: '#7fffe8' },
       { t0: 7.1, t1: 11.6, at: () => wp(carG, v3(-0.1, -2.1, 0.1)), zh: 'CD3ζ 信号域', en: 'ACTIVATION · ITAMs', dx: -170, dy: 10, hl: 190, color: '#9fe8ff' },
       { type: 'bracket', t0: 8.6, t1: 11.8, side: -1, pad: 190, at: () => [wp(carG, v3(-0.3, 2.55, 0)), wp(carG, v3(-0.3, 1.45, 0))], zh: '源自抗体', en: 'FROM AN ANTIBODY' },
-      { type: 'bracket', t0: 9.0, t1: 11.8, side: 1, pad: 330, at: () => [wp(carG, v3(0.3, -0.6, 0)), wp(carG, v3(0.3, -2.9, 0))], zh: '源自 T 细胞信号分子', en: 'FROM T-CELL SIGNALLING' },
+      { type: 'bracket', t0: 9.0, t1: 11.8, side: 1, pad: 330, at: () => [wp(carG, v3(0.3, -0.6, 0)), wp(carG, v3(0.3, -2.9, 0))], zh: '源自 T 细胞信号分子', en: 'FROM T-CELL SIGNALING' },
     ],
     update(t) {
       cam(S.camera, t);

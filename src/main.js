@@ -336,17 +336,30 @@ async function boot() {
     else if (e.key === 'f') $('btn-full').click();
   });
 
-  // Auto-hide chrome while playing.
+  // Auto-hide chrome while playing; lift captions clear of the bar while it shows.
   let idleTimer = 0;
+  const capBox = document.querySelector('#ov .cap');
+  const liftCaptions = (show) => {
+    const k = stage.clientWidth / 1920;
+    const barH = controls.offsetHeight / k;
+    const lift = show && !portrait ? Math.max(0, barH + 14 - 92) : 0;
+    capBox.style.transform = lift ? `translateY(${-lift.toFixed(0)}px)` : '';
+  };
+  const hideControls = () => {
+    controls.classList.add('hide');
+    liftCaptions(false);
+  };
   const poke = () => {
     controls.classList.remove('hide');
+    liftCaptions(true);
     clearTimeout(idleTimer);
-    if (playing && !portrait) idleTimer = setTimeout(() => controls.classList.add('hide'), 2600);
+    if (playing && !portrait) idleTimer = setTimeout(hideControls, 2600);
   };
   stage.addEventListener('pointermove', poke);
   controls.addEventListener('pointerenter', () => clearTimeout(idleTimer));
   controls.addEventListener('pointerleave', poke);
   controls.classList.remove('hide');
+  liftCaptions(true);
 
   window.addEventListener('resize', () => {
     layout();

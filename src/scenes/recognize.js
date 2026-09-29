@@ -75,7 +75,7 @@ export function approach(ctx) {
     transition: { type: 'cross', dur: 1.2 },
     bloom: { strength: 0.8, radius: 0.6, threshold: 0.74 },
     labels: [
-      { t0: 0.8, t1: 3.8, at: () => B.clone().add(v3(0.6, 1.25, 0.3)), zh: '肿瘤细胞', en: 'TUMOUR CELL', dx: 110, dy: -80, hl: 150, color: '#ff7fb6' },
+      { t0: 0.8, t1: 3.8, at: () => B.clone().add(v3(0.6, 1.25, 0.3)), zh: '肿瘤细胞', en: 'TUMOR CELL', dx: 110, dy: -80, hl: 150, color: '#ff7fb6' },
       { t0: 1.2, t1: 4.0, at: () => tc.group.position.clone().add(v3(-0.4, -0.7, 0.3)), zh: 'CAR-T 细胞', en: 'CAR-T CELL', dx: -110, dy: 90, hl: 150, color: '#7fe6ff' },
     ],
     update(t) {
@@ -180,8 +180,8 @@ export function binding(ctx) {
     transition: { type: 'cross', dur: 1.0 },
     bloom: { strength: 0.85, radius: 0.6, threshold: 0.72 },
     labels: [
-      { t0: 0.7, t1: 4.0, at: () => v3(cars[1].x - 0.2, cars[1].g.position.y - TIP + 0.3, cars[1].z), zh: 'CAR（scFv）', en: 'CHIMERIC ANTIGEN RECEPTOR', dx: -130, dy: -80, hl: 200, color: '#ffd27a' },
-      { t0: 1.1, t1: 4.4, at: () => v3(xs[3] + 0.2, ANT_TOP - 0.55, zs[3]), zh: '肿瘤抗原（如 CD19）', en: 'TUMOUR ANTIGEN', dx: 130, dy: 70, hl: 240, color: '#ff9ccb' },
+      { t0: 0.7, t1: 4.0, at: () => v3(cars[1].x - 0.2, cars[1].g.position.y - TIP + 0.3, cars[1].z), zh: '嵌合抗原受体（CAR）', en: 'CHIMERIC ANTIGEN RECEPTOR', dx: -130, dy: -80, hl: 200, color: '#ffd27a' },
+      { t0: 1.1, t1: 4.4, at: () => v3(xs[3] + 0.2, ANT_TOP - 0.55, zs[3]), zh: '靶抗原（如 CD19）', en: 'TARGET ANTIGEN', dx: 130, dy: 70, hl: 240, color: '#ff9ccb' },
       { t0: 3.3, t1: 5.8, at: () => v3(xs[2], ANT_TOP + 0.05, zs[2]), zh: '特异性结合', en: 'SPECIFIC BINDING', dx: 130, dy: -100, hl: 170, color: '#ffe6a0' },
     ],
     update(t) {

@@ -85,7 +85,7 @@ export function activate(ctx) {
     labels: [
       { t0: 1.2, t1: 5.6, at: () => beads[0].b.group.position.clone().add(v3(0.25, 0.4, 0.2)), zh: '抗 CD3/CD28 磁珠', en: 'ACTIVATION BEAD', dx: 110, dy: -80, hl: 230, color: '#e8c47f' },
       { t0: 1.8, t1: 5.8, at: () => cell.group.position.clone().add(v3(-0.5, 0.72, 0.45)), zh: '静息 T 细胞', en: 'RESTING T CELL', dx: -130, dy: -70, hl: 170, color: '#9fd0e0' },
-      { t0: 7.2, t1: 10.8, at: () => cell.group.position.clone().add(v3(-0.8, 0.55, 0.5)), zh: '活化的 T 细胞', en: 'ACTIVATED T CELL', dx: -120, dy: -90, hl: 190, color: '#7fe6ff' },
+      { t0: 7.2, t1: 10.8, at: () => cell.group.position.clone().add(v3(-0.8, 0.55, 0.5)), zh: '激活的 T 细胞', en: 'ACTIVATED T CELL', dx: -120, dy: -90, hl: 190, color: '#7fe6ff' },
     ],
     update(t) {
       cam(S.camera, t);
