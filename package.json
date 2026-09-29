@@ -1,0 +1,25 @@
+{
+  "name": "anime",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wsxwj123/anime.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wsxwj123/anime/issues"
+  },
+  "homepage": "https://github.com/wsxwj123/anime#readme",
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "playwright": "^1.56.1",
+    "three": "^0.170.0"
+  }
+}

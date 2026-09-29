@@ -1,0 +1,42 @@
+[
+  {
+    "family": "Noto Sans SC",
+    "weight": 300,
+    "file": "NotoSansSC-300.woff2"
+  },
+  {
+    "family": "Noto Sans SC",
+    "weight": 400,
+    "file": "NotoSansSC-400.woff2"
+  },
+  {
+    "family": "Noto Sans SC",
+    "weight": 500,
+    "file": "NotoSansSC-500.woff2"
+  },
+  {
+    "family": "Noto Serif SC",
+    "weight": 600,
+    "file": "NotoSerifSC-600.woff2"
+  },
+  {
+    "family": "Jost",
+    "weight": 200,
+    "file": "Jost-200.woff2"
+  },
+  {
+    "family": "Jost",
+    "weight": 400,
+    "file": "Jost-400.woff2"
+  },
+  {
+    "family": "Jost",
+    "weight": 500,
+    "file": "Jost-500.woff2"
+  },
+  {
+    "family": "IBM Plex Mono",
+    "weight": 400,
+    "file": "IBMPlexMono-400.woff2"
+  }
+]

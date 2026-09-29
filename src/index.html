@@ -1,0 +1,33 @@
+<!--HEAD-->
+<div id="app">
+  <div id="stage">
+    <canvas id="gl"></canvas>
+    <div id="ov"></div>
+    <div id="poster" hidden>
+      <button class="play-big" id="bigplay" type="button" aria-label="播放动画">
+        <span class="ring"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" /></svg></span>
+        <span class="txt"><b id="bigplay-label">播放</b><small id="bigplay-hint">约 3 分钟 · 建议开启声音</small></span>
+      </button>
+    </div>
+    <div id="controls" class="hide">
+      <button class="cbtn" id="btn-play" type="button" aria-label="播放">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path id="ico-play" d="M7 4.5v15l12.5-7.5z" /></svg>
+      </button>
+      <span class="time" id="time">00:00 / 00:00</span>
+      <div class="bar" id="bar" role="slider" tabindex="0" aria-label="播放进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="segs" id="segs"></div>
+        <div class="tip" id="tip" hidden></div>
+      </div>
+      <button class="cbtn" id="btn-sound" type="button" aria-label="声音" aria-pressed="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path id="ico-sound" d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z M15.5 8.5a5 5 0 0 1 0 7 M18 6a8.5 8.5 0 0 1 0 12" /></svg>
+      </button>
+      <button class="cbtn" id="btn-full" type="button" aria-label="全屏">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5v2H6v3zm11-5h5v5h-2V6h-3zM6 15v3h3v2H4v-5zm12 0h2v5h-5v-2h3z" /></svg>
+      </button>
+    </div>
+    <div id="loading"><div><div id="loading-txt">正在准备场景</div><div class="pbar"><i id="loading-bar"></i></div></div></div>
+    <div id="err" hidden></div>
+  </div>
+  <div id="below"><div class="below-chap" id="below-chap"></div><div class="below-cap" id="below-cap"></div></div>
+</div>
+<!--SCRIPT-->
