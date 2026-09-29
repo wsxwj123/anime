@@ -32,7 +32,7 @@ export function memory(ctx) {
     { p: v3(3.8, -1.3, -5.0), v: v3(0.14, -0.08, 0.02), s: 0.55 },
     { p: v3(-2.2, -2.4, -7.5), v: v3(-0.12, -0.05, 0), s: 0.55 },
   ].map((o, i) => {
-    const c = S.add(createCell({ lights: S.L, palette: 'tcell', seed: 1200 + i, detail: i === 0 ? 64 : 36, disp: 0.06, villi: 0.016, receptors: { kind: 'car', count: 200, length: 0.14 }, haloSize: 3.2, haloOpacity: 0.22 }));
+    const c = S.add(createCell({ lights: S.L, palette: 'tcell', seed: 1200 + i, detail: i === 0 ? 48 : 28, disp: 0.06, villi: 0.016, receptors: { kind: 'car', count: 200, length: 0.14 }, haloSize: 3.2, haloOpacity: 0.22 }));
     c.group.scale.setScalar(o.s);
     c.b.uGlow.value = 0.2;
     c.rec.userData.u.uGlow.value = 0.2;
@@ -52,7 +52,7 @@ export function memory(ctx) {
     duration: 14,
     transition: { type: 'cross', dur: 1.4 },
     bloom: { strength: 0.85, radius: 0.65, threshold: 0.72 },
-    exposure: (t) => 1 - 0.42 * smoothstep(5.8, 8.5, t),
+    exposure: (t) => 1 - 0.5 * smoothstep(5.8, 8.5, t),
     labels: [{ t0: 1.2, t1: 5.6, at: () => hero.c.group.position.clone().add(v3(0.25, 0.45, 0.2)), zh: '记忆性 CAR-T 细胞', en: 'MEMORY CAR-T CELLS', dx: 120, dy: -90, hl: 230, color: '#7fe6ff' }],
     update(t) {
       cam(S.camera, t);
@@ -67,10 +67,12 @@ export function memory(ctx) {
       }
       tissue.instanceMatrix.needsUpdate = true;
       tissue.userData.u.uTime.value = t;
+      const recede = smoothstep(6.0, 8.4, t);
       for (const m of mems) {
         m.c.group.position.copy(m.p).addScaledVector(m.v, t);
         m.c.group.rotation.set(t * 0.12, t * 0.18, 0);
         m.c.b.uGlow.value = 0.16 + 0.06 * Math.sin(t * 1.2 + m.p.x);
+        m.c.opacity = 1 - 0.8 * recede;
       }
       S.tick(t);
     },

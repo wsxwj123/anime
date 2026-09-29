@@ -20,7 +20,7 @@ export function activate(ctx) {
       lights: S.L,
       palette: 'tcellRest',
       seed: 5,
-      detail: 64,
+      detail: 48,
       disp: 0.05,
       villi: 0.02,
       receptors: { kind: 'tcr', count: 170, length: 0.1 },

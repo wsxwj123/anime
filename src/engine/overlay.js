@@ -192,7 +192,7 @@ export class Overlay {
     let cur = null;
     for (const c of this.chapterEls) {
       const t = T - c.ch.start;
-      const d = c.ch.end - c.ch.start;
+      const d = c.ch.hudEnd ?? c.ch.end - c.ch.start;
       const o = envelope(t, 0.25, d - 0.05, 0.9, 0.45);
       c.box.style.display = o > 0 ? '' : 'none';
       if (o <= 0) continue;

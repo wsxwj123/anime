@@ -1,10 +1,14 @@
 {
-  "name": "anime",
+  "name": "cart-t-journey",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "CAR-T 细胞疗法科普动画（WebGL / Three.js）",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node scripts/build.mjs",
+    "fonts": "node scripts/fonts.mjs",
+    "preview": "node scripts/preview.mjs",
+    "audio": "node scripts/audio.mjs",
+    "render": "node scripts/render.mjs",
+    "encode": "node scripts/encode.mjs"
   },
   "repository": {
     "type": "git",
@@ -12,7 +16,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/wsxwj123/anime/issues"
   },
@@ -21,5 +24,7 @@
     "esbuild": "^0.28.2",
     "playwright": "^1.56.1",
     "three": "^0.170.0"
-  }
+  },
+  "private": true,
+  "type": "module"
 }

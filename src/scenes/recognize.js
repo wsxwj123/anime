@@ -32,7 +32,7 @@ export function approach(ctx) {
   });
   const r = rng(181);
   const tumor = S.add(
-    createCell({ lights: S.L, palette: 'tumor', seed: 800, detail: 72, disp: 0.1, dispFreq: 1.1, villi: 0.016, receptors: { kind: 'antigen', count: 320, length: 0.12 }, nucleus: { offset: [0.1, 0.05, -0.1], radius: 0.6, vis: 0.4 }, haloSize: 3, haloOpacity: 0.22 }),
+    createCell({ lights: S.L, palette: 'tumor', seed: 800, detail: 52, disp: 0.1, dispFreq: 1.1, villi: 0.016, receptors: { kind: 'antigen', count: 320, length: 0.12 }, nucleus: { offset: [0.1, 0.05, -0.1], radius: 0.6, vis: 0.4 }, haloSize: 3, haloOpacity: 0.22 }),
   );
   const RB = 1.35;
   tumor.group.position.set(1.4, 0, 0);
@@ -50,7 +50,7 @@ export function approach(ctx) {
     bg.push(c);
   }
   const RA = 0.9;
-  const tc = S.add(createCell({ lights: S.L, palette: 'tcell', seed: 820, detail: 64, disp: 0.07, villi: 0.018, receptors: { kind: 'car', count: 230, length: 0.15 }, haloSize: 3, haloOpacity: 0.2 }));
+  const tc = S.add(createCell({ lights: S.L, palette: 'tcell', seed: 820, detail: 48, disp: 0.07, villi: 0.018, receptors: { kind: 'car', count: 230, length: 0.15 }, haloSize: 3, haloOpacity: 0.2 }));
   tc.group.scale.setScalar(RA);
   tc.b.uGlow.value = 0.14;
   tc.rec.userData.u.uGlow.value = 0.18;

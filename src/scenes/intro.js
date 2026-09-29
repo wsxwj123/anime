@@ -20,7 +20,7 @@ export function intro(ctx) {
       lights: S.L,
       palette: 'tcell',
       seed: 3,
-      detail: 64,
+      detail: 48,
       disp: 0.055,
       villi: 0.018,
       receptors: { kind: 'car', count: 260, length: 0.15 },

@@ -3,13 +3,13 @@ import { SHADE } from './glsl.js';
 import { color } from './common.js';
 
 // Biconcave red blood cell from the Evans–Fung profile, lathed around Y.
-export function rbcGeometry(segments = 40) {
+export function rbcGeometry(segments = 28) {
   const R = 1;
   const c0 = 0.207;
   const c2 = 2.003;
   const c4 = -1.123;
   const pts = [];
-  const N = 28;
+  const N = 12;
   const half = (r) => {
     const x = r / R;
     const s = Math.max(0, 1 - x * x);

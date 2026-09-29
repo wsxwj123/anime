@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
+import { mergeGeometries, mergeVertices } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { NOISE, SHADE, CELL_SHAPE } from './glsl.js';
 import { icosphere, glowSprite, color } from './common.js';
 import { rng, fibonacciSphere } from '../engine/util.js';
@@ -16,8 +16,8 @@ export const PALETTES = {
 };
 
 export const RECEPTOR_COLORS = {
-  car: { base: '#b07a1e', tip: '#ffd27a', glow: '#ffbf4a' },
-  antigen: { base: '#8a3a64', tip: '#ffc2dc', glow: '#ff9ccb' },
+  car: { base: '#a86a14', tip: '#f2b23a', glow: '#ffbf4a' },
+  antigen: { base: '#8a2c5c', tip: '#f59ac8', glow: '#ff9ccb' },
   tcr: { base: '#2a5c6e', tip: '#8fd8ee', glow: '#7fe6ff' },
   antibody: { base: '#8c96a3', tip: '#e9eef5', glow: '#cfe3ff' },
   spike: { base: '#6a58c8', tip: '#d6c8ff', glow: '#b49cff' },
@@ -174,78 +174,64 @@ void main() {
   vec3 N = normalize(vN);
   vec3 V = normalize(cameraPosition - vW);
   vec3 base = mix(uBase, uTip, smoothstep(0.2, 0.8, vPart));
-  vec3 col = tissueShade(N, V, base * 0.45, base, uTip, 2.2, 0.6, 0.5, 26.0);
-  col *= 0.8 + 0.4 * vRand;
-  col += uGlowC * (uGlow * (0.15 + 0.85 * vPart) + vBind * 2.4 * (0.3 + vPart));
+  vec3 col = tissueShade(N, V, base * 0.18, base, base * 1.25, 3.2, 0.45, 1.0, 46.0);
+  col *= 0.85 + 0.3 * vRand;
+  col += uGlowC * (uGlow * 0.6 * (0.15 + 0.85 * vPart) + vBind * 1.8 * (0.3 + vPart));
   gl_FragColor = vec4(col, uOpacity);
 }
 `;
 
 // Receptor silhouettes, each ~1 unit tall with the stalk along +Y.
+// Indexed and low-poly: hundreds of these ride on every cell.
 function receptorGeometry(kind) {
   const parts = [];
   const add = (g, part) => {
-    const n = g.attributes.position.count;
-    g.setAttribute('aPart', new THREE.Float32BufferAttribute(new Float32Array(n).fill(part), 1));
-    if (g.index) g = g.toNonIndexed();
     g.deleteAttribute('uv');
+    g.deleteAttribute('normal');
+    g = mergeVertices(g, 1e-4);
+    g.setAttribute('aPart', new THREE.Float32BufferAttribute(new Float32Array(g.attributes.position.count).fill(part), 1));
     parts.push(g);
   };
+  const lobe = (r, sx, sy, sz, x, y, z) => {
+    const g = new THREE.IcosahedronGeometry(r, 1);
+    g.scale(sx, sy, sz);
+    g.translate(x, y, z);
+    return g;
+  };
+  const stalk = (r0, r1, h, y) => {
+    const g = new THREE.CylinderGeometry(r0, r1, h, 6, 1, true);
+    g.translate(0, y, 0);
+    return g;
+  };
   if (kind === 'car') {
-    const stalk = new THREE.CylinderGeometry(0.05, 0.07, 0.62, 6, 1, true);
-    stalk.translate(0, 0.31, 0);
-    add(stalk, 0.0);
-    const vh = new THREE.IcosahedronGeometry(0.17, 1);
-    vh.scale(1, 1.25, 1);
-    vh.translate(-0.12, 0.78, 0);
-    add(vh, 1.0);
-    const vl = new THREE.IcosahedronGeometry(0.16, 1);
-    vl.scale(1, 1.2, 1);
-    vl.translate(0.12, 0.76, 0.02);
-    add(vl, 1.0);
+    add(stalk(0.05, 0.07, 0.62, 0.31), 0.0);
+    add(lobe(0.17, 1, 1.25, 1, -0.12, 0.78, 0), 1.0);
+    add(lobe(0.16, 1, 1.2, 1, 0.12, 0.76, 0.02), 1.0);
   } else if (kind === 'antigen') {
-    const stalk = new THREE.CylinderGeometry(0.05, 0.07, 0.4, 6, 1, true);
-    stalk.translate(0, 0.2, 0);
-    add(stalk, 0.0);
-    const d1 = new THREE.IcosahedronGeometry(0.19, 1);
-    d1.translate(0, 0.52, 0);
-    add(d1, 0.7);
-    const d2 = new THREE.IcosahedronGeometry(0.15, 1);
-    d2.translate(0.05, 0.8, 0.03);
-    add(d2, 1.0);
+    add(stalk(0.05, 0.07, 0.4, 0.2), 0.0);
+    add(lobe(0.19, 1, 1, 1, 0, 0.52, 0), 0.7);
+    add(lobe(0.15, 1, 1, 1, 0.05, 0.8, 0.03), 1.0);
   } else if (kind === 'antibody') {
-    // Y-shaped IgG
-    const stem = new THREE.CylinderGeometry(0.07, 0.08, 0.45, 6);
-    stem.translate(0, 0.22, 0);
-    add(stem, 0.0);
-    for (const s of [-1, 1]) {
-      const arm = new THREE.CylinderGeometry(0.065, 0.07, 0.5, 6);
+    add(stalk(0.07, 0.08, 0.45, 0.22), 0.0);
+    for (const sgn of [-1, 1]) {
+      const arm = new THREE.CylinderGeometry(0.065, 0.07, 0.5, 6, 1, true);
       arm.translate(0, 0.25, 0);
-      arm.rotateZ(s * 0.62);
+      arm.rotateZ(sgn * 0.62);
       arm.translate(0, 0.42, 0);
       add(arm, 1.0);
     }
   } else if (kind === 'pore') {
-    const ring = new THREE.TorusGeometry(0.5, 0.2, 6, 14);
+    const ring = new THREE.TorusGeometry(0.5, 0.2, 5, 12);
     ring.rotateX(Math.PI / 2);
     ring.translate(0, 0.05, 0);
     add(ring, 1.0);
   } else if (kind === 'spike') {
-    const stalk = new THREE.CylinderGeometry(0.07, 0.09, 0.5, 5, 1, true);
-    stalk.translate(0, 0.25, 0);
-    add(stalk, 0.0);
-    const head = new THREE.IcosahedronGeometry(0.2, 1);
-    head.scale(1, 0.8, 1);
-    head.translate(0, 0.58, 0);
-    add(head, 1.0);
+    add(stalk(0.07, 0.09, 0.5, 0.25), 0.0);
+    add(lobe(0.2, 1, 0.8, 1, 0, 0.58, 0), 1.0);
   } else {
     // short TCR-like stub
-    const stalk = new THREE.CylinderGeometry(0.06, 0.08, 0.5, 6, 1, true);
-    stalk.translate(0, 0.25, 0);
-    add(stalk, 0.0);
-    const head = new THREE.IcosahedronGeometry(0.16, 1);
-    head.translate(0, 0.6, 0);
-    add(head, 1.0);
+    add(stalk(0.06, 0.08, 0.5, 0.25), 0.0);
+    add(lobe(0.16, 1, 1, 1, 0, 0.6, 0), 1.0);
   }
   const g = mergeGeometries(parts, false);
   g.computeVertexNormals();
@@ -301,6 +287,7 @@ export function createReceptors({ u, lights, kind = 'car', count = 180, length =
     uniforms: { ...u, ...lights, ...ru },
     vertexShader: REC_VS,
     fragmentShader: REC_FS,
+    transparent: true,
   });
   const mesh = new THREE.Mesh(geo, mat);
   mesh.frustumCulled = false;

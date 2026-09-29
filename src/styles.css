@@ -772,9 +772,34 @@ body {
   margin-top: env(safe-area-inset-top, 0px);
 }
 #app.portrait {
-  justify-content: flex-start;
-  padding-top: max(12vh, 40px);
+  justify-content: center;
   box-sizing: border-box;
+}
+#app.portrait .play-big .txt {
+  display: none;
+}
+#app.portrait #poster {
+  padding: 0 4% 5%;
+  background: none;
+}
+.rotate-hint {
+  display: none;
+}
+#app.portrait .rotate-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-family: var(--f-sans);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--ink-faint);
+}
+.rotate-hint svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
 }
 
 #loading {

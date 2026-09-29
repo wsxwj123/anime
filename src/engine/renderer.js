@@ -3,6 +3,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { Pass, FullScreenQuad } from 'three/examples/jsm/postprocessing/Pass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader.js';
 
 // Renders up to two shots (for crossfades) into multisampled HDR targets and
 // mixes them. Everything downstream (bloom, grade) sees one HDR image.
@@ -160,6 +161,13 @@ export class Renderer {
     this.composer.addPass(this.shots);
     this.composer.addPass(this.bloom);
     this.composer.addPass(this.final);
+    // Without multisampling (software rendering for video export), smooth edges with FXAA.
+    this.fxaa = null;
+    if (!samples) {
+      this.fxaa = new ShaderPass(FXAAShader);
+      this.composer.addPass(this.fxaa);
+    }
+    this.grainScale = 1;
     this.frame = 0;
   }
   setSize(w, h, dpr = this.dpr) {
@@ -170,6 +178,7 @@ export class Renderer {
     this.composer.setPixelRatio(dpr);
     this.composer.setSize(w, h);
     this.final.uniforms.uRes.value.set(w * dpr, h * dpr);
+    if (this.fxaa) this.fxaa.material.uniforms.resolution.value.set(1 / (w * dpr), 1 / (h * dpr));
   }
   // state: { a:{scene,camera}, b?, mix, mode, exposure, fade, bloom:{strength,radius,threshold}, grade:{...}, time }
   render(state) {
@@ -190,7 +199,7 @@ export class Renderer {
     const g = state.grade || {};
     u.uVignette.value = g.vignette ?? 0.55;
     u.uSat.value = g.sat ?? 1.05;
-    u.uGrain.value = g.grain ?? 0.035;
+    u.uGrain.value = (g.grain ?? 0.035) * this.grainScale;
     this.composer.render(1 / 60);
     this.frame++;
   }

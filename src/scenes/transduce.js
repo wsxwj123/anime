@@ -18,7 +18,7 @@ export function transduceA(ctx) {
   });
   const RC = 1.15;
   const cell = S.add(
-    createCell({ lights: S.L, palette: 'tcell', seed: 5, detail: 72, disp: 0.07, dispSpeed: 0.15, villi: 0.02, receptors: { kind: 'tcr', count: 190, length: 0.1 }, haloSize: 3, haloOpacity: 0.16 }),
+    createCell({ lights: S.L, palette: 'tcell', seed: 5, detail: 52, disp: 0.07, dispSpeed: 0.15, villi: 0.02, receptors: { kind: 'tcr', count: 190, length: 0.1 }, haloSize: 3, haloOpacity: 0.16 }),
   );
   cell.group.scale.setScalar(RC);
   cell.b.uGlow.value = 0.12;
@@ -153,7 +153,7 @@ export function transduceB(ctx) {
     ],
   });
   const nuc = S.add(
-    createCell({ lights: S.L, palette: NUC, seed: 80, detail: 72, disp: 0.03, dispFreq: 1.1, villi: 0.0, receptors: { kind: 'pore', count: 140, length: 0.1, sway: 0 }, haloSize: 2.7, haloOpacity: 0.16, texScale: 1.6 }),
+    createCell({ lights: S.L, palette: NUC, seed: 80, detail: 52, disp: 0.03, dispFreq: 1.1, villi: 0.0, receptors: { kind: 'pore', count: 140, length: 0.1, sway: 0 }, haloSize: 2.7, haloOpacity: 0.16, texScale: 1.6 }),
   );
   nuc.group.position.set(-1.7, -0.35, -0.6);
   nuc.group.scale.setScalar(1.95);

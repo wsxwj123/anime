@@ -43,7 +43,8 @@ async function boot() {
 
   let renderer;
   try {
-    renderer = new Renderer(canvas, { preserve: CAPTURE, samples: 4, dpr: 1 });
+    renderer = new Renderer(canvas, { preserve: CAPTURE, samples: Number(params.get('msaa') ?? 4), dpr: 1 });
+    if (params.has('grain')) renderer.grainScale = Number(params.get('grain'));
   } catch (e) {
     showError('当前浏览器无法启用 WebGL 2，请换用最新版 Chrome、Edge、Safari 或 Firefox 观看。');
     throw e;
@@ -81,7 +82,7 @@ async function boot() {
       if (portrait) {
         sw = W;
         sh = (W * 9) / 16;
-        if (controls.parentNode !== app) app.appendChild(controls);
+        if (controls.parentNode !== app) app.insertBefore(controls, app.querySelector('.rotate-hint'));
       } else {
         sw = Math.min(W, (H * 16) / 9);
         sh = (sw * 9) / 16;
@@ -149,7 +150,16 @@ async function boot() {
     renderAt(T);
     return true;
   };
-  window.__audio = (sampleRate = 48000) => sound.renderOffline(sampleRate);
+  window.__audio = async (sampleRate = 48000) => {
+    window.__wav = await sound.renderOffline(sampleRate);
+    return window.__wav.length;
+  };
+  window.__wavChunk = (off, len) => {
+    const b = window.__wav.subarray(off, off + len);
+    let s = '';
+    for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000));
+    return btoa(s);
+  };
   // Render any shot in isolation (look development).
   const extra = {};
   window.__shot = (id, t) => {
@@ -244,7 +254,7 @@ async function boot() {
   function seek(t) {
     T = clamp(t, 0, tl.total);
     dirty = true;
-    if (playing) sound.play(T);
+    if (playing && !dragging) sound.play(T);
     syncUI();
   }
   const toggle = () => (playing ? pause() : play());
@@ -288,6 +298,7 @@ async function boot() {
   let dragging = false;
   bar.addEventListener('pointerdown', (e) => {
     dragging = true;
+    if (playing) sound.pause();
     bar.setPointerCapture(e.pointerId);
     seek(tAtX(e.clientX));
     started = true;
@@ -302,7 +313,10 @@ async function boot() {
     const r = segs.getBoundingClientRect();
     tip.style.left = `${clamp((e.clientX - r.left) / r.width) * 100}%`;
   });
-  bar.addEventListener('pointerup', () => (dragging = false));
+  bar.addEventListener('pointerup', () => {
+    dragging = false;
+    if (playing) sound.play(T);
+  });
   bar.addEventListener('pointerleave', () => (tip.hidden = true));
   bar.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') seek(T + 5);

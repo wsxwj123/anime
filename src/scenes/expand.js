@@ -22,7 +22,7 @@ export function expand(ctx) {
   const N = 1 << GENS;
   const heroes = Array.from({ length: N }, (_, i) => {
     const c = S.add(
-      createCell({ lights: S.L, palette: 'tcell', seed: 300 + i, detail: 40, disp: 0.06, villi: 0.018, receptors: { kind: 'car', count: 170, length: 0.15 }, nucleus: { vis: 0.4, radius: 0.55 }, haloSize: 3, haloOpacity: 0.16 }),
+      createCell({ lights: S.L, palette: 'tcell', seed: 300 + i, detail: 32, disp: 0.06, villi: 0.018, receptors: { kind: 'car', count: 170, length: 0.15 }, nucleus: { vis: 0.4, radius: 0.55 }, haloSize: 3, haloOpacity: 0.16 }),
     );
     c.b.uGlow.value = 0.1;
     c.rec.userData.u.uGlow.value = 0.18;

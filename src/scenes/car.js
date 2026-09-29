@@ -158,7 +158,7 @@ export function car(ctx) {
     transition: { type: 'cross', dur: 1.2 },
     bloom: { strength: 0.8, radius: 0.55, threshold: 0.75 },
     labels: [
-      { t0: 1.6, t1: 11.6, at: () => wp(carG, v3(0.35, 2.2, 0.1)), zh: '单链抗体片段 scFv', en: 'ANTIGEN BINDING', dx: 150, dy: -40, hl: 250, color: '#ffd27a' },
+      { t0: 1.6, t1: 11.6, at: () => wp(carG, v3(0.35, 2.2, 0.1)), zh: '单链抗体片段 scFv', en: 'ANTIGEN BINDING', dx: 150, dy: 36, hl: 250, color: '#ffd27a' },
       { t0: 3.0, t1: 11.6, at: () => wp(carG, v3(0.08, 1.05, 0)), zh: '铰链区', en: 'HINGE', dx: 190, dy: 10, hl: 150, color: '#e8d8b0' },
       { t0: 4.4, t1: 11.6, at: () => wp(carG, v3(-0.08, 0.0, 0)), zh: '跨膜区', en: 'TRANSMEMBRANE', dx: -200, dy: -30, hl: 170, color: '#ffc890' },
       { t0: 5.8, t1: 11.6, at: () => wp(carG, v3(0.32, -0.92, 0)), zh: '共刺激域 4-1BB / CD28', en: 'CO-STIMULATION', dx: 160, dy: 20, hl: 290, color: '#7fffe8' },

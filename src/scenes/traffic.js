@@ -46,7 +46,7 @@ export function vessel(ctx) {
     { x: -0.4, y: -1.2, z0: 18, sp: 1.35, s: 0.32 },
     { x: 0.2, y: 1.3, z0: 24, sp: 1.2, s: 0.32 },
   ].map((o, i) => {
-    const c = S.add(createCell({ lights: S.L, palette: 'tcell', seed: 400 + i, detail: i === 0 ? 56 : 32, disp: 0.07, villi: 0.018, receptors: { kind: 'car', count: i === 0 ? 200 : 120, length: 0.15 }, haloSize: 3, haloOpacity: 0.2 }));
+    const c = S.add(createCell({ lights: S.L, palette: 'tcell', seed: 400 + i, detail: i === 0 ? 44 : 24, disp: 0.07, villi: 0.018, receptors: { kind: 'car', count: i === 0 ? 200 : 120, length: 0.15 }, haloSize: 3, haloOpacity: 0.2 }));
     c.group.scale.setScalar(o.s);
     c.b.uGlow.value = 0.18;
     c.rec.userData.u.uGlow.value = 0.2;
@@ -162,7 +162,7 @@ export function extravasate(ctx) {
   const src = v3(5.0, -3.4, -2.2);
   const dst = v3(0.2, -0.3, 0);
 
-  const hero = S.add(createCell({ lights: S.L, palette: 'tcell', seed: 700, detail: 64, disp: 0.07, villi: 0.018, receptors: { kind: 'car', count: 220, length: 0.15 }, haloSize: 3, haloOpacity: 0.22 }));
+  const hero = S.add(createCell({ lights: S.L, palette: 'tcell', seed: 700, detail: 48, disp: 0.07, villi: 0.018, receptors: { kind: 'car', count: 220, length: 0.15 }, haloSize: 3, haloOpacity: 0.22 }));
   const HS = 0.62;
   hero.group.scale.setScalar(HS);
   hero.b.uGlow.value = 0.15;

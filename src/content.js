@@ -152,6 +152,7 @@ export const CHAPTERS = [
     act: 2,
     zh: '长期守护',
     en: 'PERSISTENCE',
+    hudEnd: 6.2,
     shots: ['memory'],
     captions: [{ t0: 0.8, t1: 6.4, text: '部分 CAR-T 细胞可在体内长期存留，形成*免疫记忆*，持续监视肿瘤复发。' }],
   },

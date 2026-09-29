@@ -30,7 +30,7 @@ export function synapse(ctx) {
   const r = rng(221);
   const RT = 1.05;
   const RB = 1.3;
-  const tc = S.add(createCell({ lights: S.L, palette: 'tcell', seed: 900, detail: 72, disp: 0.06, villi: 0.012, receptors: { kind: 'car', count: 260, length: 0.14 }, haloSize: 2.8, haloOpacity: 0.16 }));
+  const tc = S.add(createCell({ lights: S.L, palette: 'tcell', seed: 900, detail: 52, disp: 0.06, villi: 0.012, receptors: { kind: 'car', count: 260, length: 0.14 }, haloSize: 2.8, haloOpacity: 0.16 }));
   tc.group.position.set(-1.0, 0.05, 0);
   tc.group.scale.setScalar(RT);
   tc.mat.side = THREE.DoubleSide;
@@ -39,7 +39,7 @@ export function synapse(ctx) {
   tc.b.uGlow.value = 0.1;
   tc.rec.userData.u.uGlow.value = 0.04;
   tc.rec.userData.u.uLen.value = 0.12;
-  const tumor = S.add(createCell({ lights: S.L, palette: 'tumor', seed: 901, detail: 72, disp: 0.09, villi: 0.015, receptors: { kind: 'antigen', count: 300, length: 0.12 }, nucleus: { vis: 0.35, radius: 0.6 }, haloSize: 3, haloOpacity: 0.2 }));
+  const tumor = S.add(createCell({ lights: S.L, palette: 'tumor', seed: 901, detail: 52, disp: 0.09, villi: 0.015, receptors: { kind: 'antigen', count: 300, length: 0.12 }, nucleus: { vis: 0.35, radius: 0.6 }, haloSize: 3, haloOpacity: 0.2 }));
   tumor.group.position.set(1.28, 0, 0);
   tumor.group.scale.setScalar(RB);
   const P = v3(0.06, 0.02, 0);
@@ -290,12 +290,12 @@ export function apoptosis(ctx) {
   const r = rng(261);
   const RB = 1.3;
   const RA = 0.88;
-  const tumor = S.add(createCell({ lights: S.L, palette: 'tumor', seed: 950, detail: 72, disp: 0.09, villi: 0.015, receptors: { kind: 'antigen', count: 300, length: 0.12 }, nucleus: { vis: 0.4, radius: 0.6 }, haloSize: 3, haloOpacity: 0.22 }));
+  const tumor = S.add(createCell({ lights: S.L, palette: 'tumor', seed: 950, detail: 52, disp: 0.09, villi: 0.015, receptors: { kind: 'antigen', count: 300, length: 0.12 }, nucleus: { vis: 0.4, radius: 0.6 }, haloSize: 3, haloOpacity: 0.22 }));
   tumor.group.position.set(0.9, 0, 0);
   tumor.group.scale.setScalar(RB);
   tumor.b.uHotColor.value = color('#ff8a3a');
   const B = tumor.group.position.clone();
-  const tc = S.add(createCell({ lights: S.L, palette: 'tcell', seed: 951, detail: 64, disp: 0.07, villi: 0.018, receptors: { kind: 'car', count: 230, length: 0.15 }, haloSize: 3, haloOpacity: 0.2 }));
+  const tc = S.add(createCell({ lights: S.L, palette: 'tcell', seed: 951, detail: 48, disp: 0.07, villi: 0.018, receptors: { kind: 'car', count: 230, length: 0.15 }, haloSize: 3, haloOpacity: 0.2 }));
   tc.group.scale.setScalar(RA);
   tc.b.uGlow.value = 0.2;
   tc.rec.userData.u.uGlow.value = 0.18;
