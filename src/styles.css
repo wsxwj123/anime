@@ -298,6 +298,9 @@ body {
   text-wrap: balance;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.7);
 }
+.cap-line .nb {
+  white-space: nowrap;
+}
 .cap-line em,
 .below-cap em {
   font-style: normal;

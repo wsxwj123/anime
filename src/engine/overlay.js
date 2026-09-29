@@ -19,7 +19,8 @@ const svg = (tag, attrs, parent) => {
   if (parent) parent.appendChild(e);
   return e;
 };
-export const markup = (s) => s.replace(/\*(.+?)\*/g, '<em>$1</em>');
+// *term* = key term (accent colour); {words} = keep on one line.
+export const markup = (s) => s.replace(/\*(.+?)\*/g, '<em>$1</em>').replace(/\{(.+?)\}/g, '<span class="nb">$1</span>');
 
 const _v = new THREE.Vector3();
 

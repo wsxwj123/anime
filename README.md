@@ -2,6 +2,8 @@
 
 一部约 3 分钟的 CAR-T 细胞疗法科普动画：从患者血液中采集 T 细胞，经基因改造、体外扩增、静脉回输，到在体内识别并清除肿瘤细胞。
 
+![画面截图：片头、离心分层、CAR 结构、血流、抗原识别、穿孔素成孔](docs/stills.jpg)
+
 动画用 Three.js 实时渲染（WebGL 2），带电影级后期（HDR 泛光、ACES 色调映射、暗角、胶片颗粒）、中英双语标注、分章节字幕，以及与画面同步的生成式配乐。
 
 ## 观看
@@ -9,7 +11,7 @@
 - **网页版**：用浏览器直接打开 `dist/index.html`（单文件，离线可用，已内嵌 three.js 与字体）。推荐最新版 Chrome / Edge / Safari / Firefox，横屏或全屏观看。
   - 空格：播放 / 暂停　←/→：快退 / 快进 5 秒　M：静音　F：全屏
   - 进度条按章节分段，可点击跳转。
-- **视频版**：`scripts/render.mjs` 逐帧导出 1080p 视频（见下文），输出在 `out/`。
+- **视频版**：`video/cart-t-1080p.mp4`（1080p30，H.264 + AAC，适合直接上传各视频平台）。也可以用下文的脚本自行导出。
 
 ## 章节
 
@@ -51,8 +53,9 @@ npm run preview -- --every 4            # 每 4 秒一帧并拼成总览图
 
 npm run audio                           # 离线渲染配乐 → out/soundtrack.wav
 npm run render                          # 逐帧渲染 1080p30 → out/frames/（可中断后续跑）
-npm run encode                          # 编码 H.264 + AAC → out/cart-t-1080p.mp4
-npm run encode -- --name 720p --scale 1280 --crf 22
+npm run encode                          # 两遍编码 H.264 + AAC（约 4 Mbps）→ out/cart-t-1080p.mp4
+npm run encode -- --name publish --bitrate 2800k --preset slower --ab 128k   # 发布用压缩版
+npm run encode -- --name master --crf 18                                     # 高码率母版
 ```
 
 动画中所有运动都是时间的纯函数（`window.__seek(t)`），因此逐帧导出与实时播放完全一致。
